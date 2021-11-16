@@ -5,24 +5,24 @@ function Item({ item, modal }) {
     }
 
     return (
-        <div className='one'>
+        <div className='general-item'>
             <span>Product: </span>
-            <div className='two'>
+            <div className='each-item'>
                 <div>{item.product}</div>
             </div>
             <span>Quantity: </span>
-            <div className='two'>
+            <div className='each-item'>
                 <div>{item.quantity}</div>
             </div>
-            <div className='two'>
+            <div className='each-item'>
                 <span>Price: </span>
                 <div>{item.price}</div>
             </div>
-            <div className='two'>
+            <div className='each-item'>
                 <span>In stock: </span>
                 <div>{item.in_stock}</div>
             </div>
-            <div className='two'>
+            <div className='each-item'>
                 <span>Last order: </span>
                 <div>{item.last_order}</div>
             </div>

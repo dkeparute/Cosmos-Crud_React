@@ -27,20 +27,20 @@ function NewItem({ create }) {
     }
 
     return (
-        <div className='four'>
-            <div className='five'>
+        <div className='new-item'>
+            <div className='each-new-item'>
                 <span>Product: </span> <input type="text" value={inputs.product} onChange={(e) => control(e, 'product')} placeholder="insert product" />
             </div>
-            <div className='five'>
-                <span>Quantity: </span> <input type="text" value={inputs.quantity} onChange={(e) => control(e, 'quantity')} placeholder="insert quantity" />
+            <div className='each-new-item'>
+                <span>Quantity: </span> <input type="text" value={inputs.quantity} onChange={(e) => control(e, 'quantity')} placeholder="insert number" />
             </div>
-            <div className='five'>
+            <div className='each-new-item'>
                 <span>Price: </span> <input type="text" value={inputs.price} onChange={(e) => control(e, 'price')} placeholder="insert price" />
             </div>
-            <div className='five'>
-                <span>In stock: </span> <input type="date" value={inputs.in_stock} onChange={(e) => control(e, 'in_stock')} />
+            <div className='each-new-item'>
+                <span>In stock: </span> <input type="text" value={inputs.in_stock} onChange={(e) => control(e, 'in_stock')} placeholder="insert number"  />
             </div>
-            <div className='five'>
+            <div className='each-new-item'>
                 <span>Last order: </span> <input type="date" value={inputs.last_order} onChange={(e) => control(e, 'last_order')} />
             </div>
             <button onClick={handleCreate}>Add new</button>

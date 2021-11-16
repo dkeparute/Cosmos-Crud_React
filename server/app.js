@@ -17,7 +17,7 @@ const con = mysql.createConnection({
     database: "bandymas",
 });
 
-con.connect(function(err) {
+con.connect(function (err) {
     if (err) throw err;
     console.log("Connected!");
 });
@@ -41,7 +41,7 @@ app.post('/products', (req, res) => {
     const sql = `
         INSERT INTO products
         (product, quantity, price, in_stock, last_order)
-        VALUES (?, ?, ?, ?)
+        VALUES (?, ?, ?, ?, ?)
     `;
     con.query(sql, [
         req.body.product,
@@ -92,7 +92,88 @@ app.delete('/products/:id', (req, res) => {
         res.send(result);
     })
 })
+// ----------------------------------------------------------------
+
+// Randa visus skirtingus th
+app.get('/products-product', (req, res) => {
+    const sql = `
+    SELECT DISTINCT product
+    FROM products
+    `;
+    con.query(sql, (err, results) => {
+        if (err) {
+            throw err;
+        }
+        res.send(results);
+    })
+})
+
+// Rodo tam tikro th rezultatus
+app.get('/products-filter/:t', (req, res) => {
+    const sql = `
+    SELECT *
+    FROM products
+    WHERE product = ?
+    `;
+    console.log(req.query.s);
+    con.query(sql, [req.params.t], (err, results) => {
+        if (err) {
+            throw err;
+        }
+        res.send(results);
+    })
+})
+
+// Paieska pagal th
+app.get('/products-product', (req, res) => {
+    const sql = `
+    SELECT *
+    FROM products
+    WHERE product like ?
+    `;
+    console.log(req.query.s);
+    con.query(sql, ['%' + req.query.s + '%'], (err, results) => {
+        if (err) {
+            throw err;
+        }
+        res.send(results);
+    })
+})
+
+//----------------------------------------------------------------------------------------
+
+// Bendra statistika
+app.get('/stats', (req, res) => {
+    const sql = `
+  SELECT COUNT(id) as count, SUM(price) as price, AVG(price) as average
+  FROM products
+  `;
+    // console.log(req.query.s);
+    con.query(sql, ['%' + req.query.s + '%'], (err, results) => {
+        if (err) {
+            throw err;
+        }
+        res.send(results);
+    })
+})
+
+// Grupine statistika
+app.get('/group-stats', (req, res) => {
+    const sql = `
+  SELECT COUNT(id) as count, product
+  FROM products
+  GROUP BY product
+  ORDER BY product desc
+  `;
+    // console.log(req.query.s);
+    con.query(sql, ['%' + req.query.s + '%'], (err, results) => {
+        if (err) {
+            throw err;
+        }
+        res.send(results);
+    })
+})
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+    console.log(`Example app listening at http://localhost:${port}`);
 });

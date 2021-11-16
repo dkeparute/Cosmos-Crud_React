@@ -3,10 +3,11 @@ import { useEffect, useState } from "react";
 function Modal({ showModal, hide, modalElement, edit, remove }) {
 
     const [inputs, setInputs] = useState({
-        th: '',
-        th: '',
-        th: '',
-        th: ''
+        product: '',
+        quantity: '',
+        price: '',
+        in_stock: '',
+        last_order: ''
     })
 
     const control = (e, what) => {
@@ -17,37 +18,39 @@ function Modal({ showModal, hide, modalElement, edit, remove }) {
 
     useEffect(() => {
         setInputs({
-            th: modalElement.th,
-            th: modalElement.th,
-            th: modalElement.th,
-            th: modalElement.th
+            product: modalElement.product,
+            quantity: modalElement.quantity,
+            price: modalElement.price,
+            in_stock: modalElement.in_stock,
+            last_order: modalElement.last_order.slice(0,10)
         })
     }, [modalElement])
 
     const handleEdit = () => {
         edit({
-            th: inputs.th,
-            th: inputs.th,
-            th: inputs.th,
-            th: inputs.th
+            product: inputs.product,
+            quantity: inputs.quantity,
+            price: inputs.price,
+            in_stock: inputs.in_stock,
+            last_order: inputs.last_order
         }, modalElement.id)
     }
 
     return (
-        <div className='six' style={{ display: showModal ? 'flex' : 'none', top: window.scrollY + 200 + 'px' }}>
-            <div className='seven'>
-                <span>Product: </span> <input type="text" value={inputs.product} onChange={(e) => control(e, 'product')} placeholder="insert product" />
+        <div className='general-modal' style={{ display: showModal ? 'flex' : 'none', top: window.scrollY + 300 + 'px' }}>
+            <div className='each-modal'>
+                <span>Product: </span> <input type="text" value={inputs.product} onChange={(e) => control(e, 'product')} />
             </div>
-            <div className='seven'>
-                <span>Quantity: </span> <input type="text" value={inputs.quantity} onChange={(e) => control(e, 'quantity')} placeholder="insert quantity" />
+            <div className='each-modal'>
+                <span>Quantity: </span> <input type="text" value={inputs.quantity} onChange={(e) => control(e, 'quantity')} />
             </div>
-            <div className='seven'>
-                <span>Price: </span> <input type="text" value={inputs.price} onChange={(e) => control(e, 'price')} placeholder="insert price" />
+            <div className='each-modal'>
+                <span>Price: </span> <input type="text" value={inputs.price} onChange={(e) => control(e, 'price')} />
             </div>
-            <div className='seven'>
-                <span>In stock: </span> <input type="date" value={inputs.in_stock} onChange={(e) => control(e, 'in_stock')} />
+            <div className='each-modal'>
+                <span>In stock: </span> <input type="text" value={inputs.in_stock} onChange={(e) => control(e, 'in_stock')} />
             </div>
-            <div className='seven'>
+            <div className='each-modal'>
                 <span>Last order: </span> <input type="date" value={inputs.last_order} onChange={(e) => control(e, 'last_order')} />
             </div>
             <button onClick={handleEdit}>Save</button>
