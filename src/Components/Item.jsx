@@ -24,7 +24,7 @@ function Item({ item, modal }) {
             </div>
             <div className='each-item'>
                 <span>Last order: </span>
-                <div>{item.last_order}</div>
+                <div>{item.last_order.slice(0,10)}</div>
             </div>
             <button onClick={showEdit}>Edit</button>
         </div>
